@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int count = 0;
+int swapCount = 0;
 
 void Nhap(int *a,int n)
 {
@@ -25,7 +25,7 @@ void SapXep(int *a, int left, int right)
         if(i <= j)
         {
             swap(a[i], a[j]);
-            count++;
+            swapCount++;
             i++;
             j--;
         }
@@ -47,7 +47,7 @@ int main()
     {
         cout << a[i] << " ";
     }
-    cout << endl << "Number of times to swap 2 numbers: " << count << endl;
+    cout << endl << "Number of times to swap 2 numbers: " << swapCount << endl;
 
     return 0;
 }

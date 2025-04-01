@@ -11,7 +11,6 @@ public class Bai1{
     }
     
     public void Output(int[] a, int n){
-        System.out.println("The elements of the array are: ");
         for (int i = 0; i < n; i++) {
             System.out.print(a[i] + " ");
         }
@@ -37,6 +36,7 @@ public class Bai1{
         int[] a = new int[n];
         Bai1 b1 = new Bai1();
         b1.Input(a, n);
+        System.out.println("The elements of the array are: ");
         b1.Output(a, n);
         System.out.print("\nEnter the number you want to find: ");
         int k = sc.nextInt();

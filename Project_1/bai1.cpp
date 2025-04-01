@@ -40,6 +40,7 @@ void Result(int *a,int *b, int n, int m)
     }
 }
 
+// This is the template: // 
 int main()
 {
     int n;

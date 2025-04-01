@@ -11,7 +11,6 @@ public class Bai2 {
     }
     
     public void Output(int[] a, int n){
-        System.out.println("The elements of the array are: ");
         for (int i = 0; i < n; i++) {
             System.out.print(a[i] + " ");
         }
@@ -29,7 +28,7 @@ public class Bai2 {
         }   
         return -1;    
     }
-
+    
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.print("Array size: ");
@@ -37,6 +36,7 @@ public class Bai2 {
         int[] a = new int[n];
         Bai2 b2 = new Bai2();
         b2.Input(a, n);
+        System.out.println("The elements of the array are: ");
         b2.Output(a, n);
         do{      
             System.out.print("\nEnter the number: ");
