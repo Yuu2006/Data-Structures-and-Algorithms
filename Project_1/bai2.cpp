@@ -22,7 +22,6 @@ int TimKiem(int *a, int n, int k)
     return -1;
 }
 
-// This is the template: //
 
 int main()
 {

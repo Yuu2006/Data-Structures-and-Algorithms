@@ -29,8 +29,8 @@ public class Bai3 {
                 j--;
             }    
         }
-        if(l < j) Sort(a, l, j);
-        if(i < r) Sort(a, i, r);
+        Sort(a, l, j);
+        Sort(a, i, r);
     }
     // swap
     private void swap(int[] a,int i, int j) {

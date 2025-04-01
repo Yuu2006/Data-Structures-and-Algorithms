@@ -29,6 +29,8 @@ public class Bai1{
         return -1;    
     }
     
+    // This is the template: //
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.print("Array size: ");
