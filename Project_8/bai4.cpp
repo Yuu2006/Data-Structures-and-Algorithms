@@ -1,13 +1,6 @@
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-define
-include
-using
-###End banned keyword*/
-
 #include <iostream>
 using namespace std;
 
-//###INSERT CODE HERE -
 struct Node
 {
     int val;
@@ -27,15 +20,15 @@ Node *createNode(int x)
 
 void insertNode(Tree &T, int x)
 {
-    if(!T) // T == NULL
+    if(!T)
     {
         T = createNode(x);
         return;
     }
-    if(x == T->val) return;
-    else if(x > T->val) 
+    if (x == T->val) return;
+    else if (x > T->val)
         insertNode(T->right, x);
-    else 
+    else
         insertNode(T->left, x);
 }
 
@@ -46,13 +39,13 @@ void inputTree(Tree &T)
     for(int i = 0; i < n; i++)
     {
         cin >> x;
-        insertNode(T, x);
+		insertNode(T, x);
     }
 }
 
 void NLR(Tree T)
 {
-    if(T != NULL)
+	if(T != NULL)
     {
         cout << T->val << " ";
         NLR(T->left);
@@ -60,33 +53,36 @@ void NLR(Tree T)
     }
 }
 
-void LRN(Tree T)
+void Rotate(Tree &T)
 {
-    if(T != NULL)
+    if(T == NULL)
     {
-        LRN(T->left);
-        LRN(T->right);
-        cout << T->val << " ";
+        cout<< "\nKhong the xoay vi cay rong";
+        return;
     }
-}
+    if(T->right == NULL)
+    {
+        cout << "\nKhong the xoay trai vi khong co nut con ben phai";
+        return;
+    }
+    // Tree temp1 = T;
+    // Tree temp2 = T->right->left;
+    // T = T->right;
+    // temp1->right = temp2;
+    // T->left = temp1;
 
-void LNR(Tree T)
-{
-    if(T != NULL)
-    {
-        LNR(T->left);
-        cout << T->val << " ";
-        LNR(T->right);
-    }
+    Tree p = T->right;
+    T->right = T->right->left;
+    p->left = T;
+    T = p;
 }
 
 int main()
 {
 	Tree T = NULL;
-	inputTree(T);
-	cout<<"\nNLR: "; NLR(T);
-	cout<<"\nLRN: "; LRN(T);
-	cout<<"\nLNR: "; LNR(T);
-
+	inputTree(T); 
+    cout<<"NLR: "; NLR(T);
+    Rotate(T);
+    cout<<"\nNLR: "; NLR(T);
 	return 0;
 }

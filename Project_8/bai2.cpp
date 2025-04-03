@@ -80,6 +80,50 @@ void LNR(Tree T)
     }
 }
 
+void listLeafs(Tree T)
+{
+	if(!T) return;
+	if(!T->left && !T->right)
+	{
+		cout << T->val << " ";
+	}
+	listLeafs(T->left);
+	listLeafs(T->right);
+}
+
+void listInternalNodes(Tree T, int x)
+{
+	if(!T) return;
+	if((T->left || T->right) && x != 0)
+	{
+		cout << T->val << " ";
+	}
+	listInternalNodes(T->left, x+1);
+	listInternalNodes(T->right, x+1);
+}
+
+void listNodesWithOneChild(Tree T)
+{
+	if(!T) return;
+	if((T->left && !T->right) || (!T->left && T->right))
+	{
+		cout << T->val << " ";
+	}
+	listNodesWithOneChild(T->left);
+	listNodesWithOneChild(T->right);
+}
+
+void listNodesWithTwoChildren(Tree T)
+{
+	if(!T) return;
+	if(T->left && T->right)
+	{
+		cout << T->val << " ";
+	}
+	listNodesWithTwoChildren(T->left);
+	listNodesWithTwoChildren(T->right);
+}
+
 int main()
 {
 	Tree T = NULL;
@@ -87,6 +131,11 @@ int main()
 	cout<<"\nNLR: "; NLR(T);
 	cout<<"\nLRN: "; LRN(T);
 	cout<<"\nLNR: "; LNR(T);
+
+	cout<<"\nLeaf nodes: "; listLeafs(T);
+	cout<<"\nInternal nodes: "; listInternalNodes(T,0); //co de san tham so thu 2 cho ai co nhu cau dung, SV khong dung tham so thu 2 nay cung khong sao
+	cout<<"\nNodes with one child: "; listNodesWithOneChild(T);
+	cout<<"\nNodes with two children: "; listNodesWithTwoChildren(T);
 
 	return 0;
 }

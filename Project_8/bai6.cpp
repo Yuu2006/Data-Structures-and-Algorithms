@@ -27,15 +27,15 @@ Node *createNode(int x)
 
 void insertNode(Tree &T, int x)
 {
-    if(!T) // T == NULL
+    if(!T)
     {
         T = createNode(x);
         return;
     }
-    if(x == T->val) return;
-    else if(x > T->val) 
+    if (x == T->val) return;
+    else if (x > T->val)
         insertNode(T->right, x);
-    else 
+    else
         insertNode(T->left, x);
 }
 
@@ -46,47 +46,29 @@ void inputTree(Tree &T)
     for(int i = 0; i < n; i++)
     {
         cin >> x;
-        insertNode(T, x);
+		insertNode(T, x);
     }
 }
 
-void NLR(Tree T)
+void nodesWithLevel(Tree T, int k)
 {
-    if(T != NULL)
+    if(T == NULL) return;
+    if(k == 0) 
     {
         cout << T->val << " ";
-        NLR(T->left);
-        NLR(T->right);
+        return;
     }
-}
-
-void LRN(Tree T)
-{
-    if(T != NULL)
-    {
-        LRN(T->left);
-        LRN(T->right);
-        cout << T->val << " ";
-    }
-}
-
-void LNR(Tree T)
-{
-    if(T != NULL)
-    {
-        LNR(T->left);
-        cout << T->val << " ";
-        LNR(T->right);
-    }
+    nodesWithLevel(T->right, k - 1);
+    nodesWithLevel(T->left, k - 1);
 }
 
 int main()
 {
 	Tree T = NULL;
 	inputTree(T);
-	cout<<"\nNLR: "; NLR(T);
-	cout<<"\nLRN: "; LRN(T);
-	cout<<"\nLNR: "; LNR(T);
+    int k; cout<<"Enter k: "; cin >>k;
+    cout<<"\nList of nodes with level "<<k<<" (R->L) : ";
+    nodesWithLevel(T, k);
 
 	return 0;
 }

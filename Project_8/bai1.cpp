@@ -8,6 +8,7 @@ using
 using namespace std;
 
 //###INSERT CODE HERE -
+
 struct Node
 {
     int val;
@@ -25,6 +26,8 @@ Node *createNode(int x)
     return p;
 }
 
+bool flag = false;
+
 void insertNode(Tree &T, int x)
 {
     if(!T) // T == NULL
@@ -32,10 +35,15 @@ void insertNode(Tree &T, int x)
         T = createNode(x);
         return;
     }
-    if(x == T->val) return;
-    else if(x > T->val) 
+    if (x == T->val)
+    {
+        cout << "Bi trung gia tri, ket thuc qua trinh tao cay" << endl;
+		flag = true;
+        return;
+    }
+    else if (x > T->val)
         insertNode(T->right, x);
-    else 
+    else
         insertNode(T->left, x);
 }
 
@@ -46,13 +54,14 @@ void inputTree(Tree &T)
     for(int i = 0; i < n; i++)
     {
         cin >> x;
-        insertNode(T, x);
+		insertNode(T, x);
+		if(flag) break;
     }
 }
 
 void NLR(Tree T)
 {
-    if(T != NULL)
+	if(T != NULL)
     {
         cout << T->val << " ";
         NLR(T->left);
@@ -60,33 +69,13 @@ void NLR(Tree T)
     }
 }
 
-void LRN(Tree T)
-{
-    if(T != NULL)
-    {
-        LRN(T->left);
-        LRN(T->right);
-        cout << T->val << " ";
-    }
-}
-
-void LNR(Tree T)
-{
-    if(T != NULL)
-    {
-        LNR(T->left);
-        cout << T->val << " ";
-        LNR(T->right);
-    }
-}
-
 int main()
 {
 	Tree T = NULL;
-	inputTree(T);
-	cout<<"\nNLR: "; NLR(T);
-	cout<<"\nLRN: "; LRN(T);
-	cout<<"\nLNR: "; LNR(T);
-
+	inputTree(T); //Khi bi trung gia tri thi ket thuc qua trinh tao cay, khong nhap tiep nua
+	cout<<"NLR: "; NLR(T);
 	return 0;
 }
+
+
+

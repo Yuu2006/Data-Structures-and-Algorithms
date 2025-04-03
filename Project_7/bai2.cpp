@@ -50,26 +50,6 @@ void inputTree(Tree &T)
     }
 }
 
-void NLR(Tree T)
-{
-    if(T != NULL)
-    {
-        cout << T->val << " ";
-        NLR(T->left);
-        NLR(T->right);
-    }
-}
-
-void LRN(Tree T)
-{
-    if(T != NULL)
-    {
-        LRN(T->left);
-        LRN(T->right);
-        cout << T->val << " ";
-    }
-}
-
 void LNR(Tree T)
 {
     if(T != NULL)
@@ -80,13 +60,43 @@ void LNR(Tree T)
     }
 }
 
+Node *Search(Tree T, int x)
+{
+    if(T != NULL)
+    {
+        if(x == T->val) return T;
+        else if(x < T->val) return Search(T->left, x);
+        else return Search(T->right, x);
+    }
+    else return T;
+}
+
+int minValue(Tree T)
+{
+    if(T != NULL && T->left == NULL) return T->val;
+    else return minValue(T->left);
+}
+
+int maxValue(Tree T)
+{
+    if(T != NULL && T->right == NULL) return T->val;
+    else return maxValue(T->right);
+}
+
 int main()
 {
 	Tree T = NULL;
 	inputTree(T);
-	cout<<"\nNLR: "; NLR(T);
-	cout<<"\nLRN: "; LRN(T);
-	cout<<"\nLNR: "; LNR(T);
+	cout<<"LNR: "; LNR(T); cout<<endl;
+
+
+    int x; cout<<"\nEnter the element you want to find: ";cin>>x;
+    Node *p=Search(T,x);
+    if (p) cout<< "Found";
+    else cout<<"Not found";
+    cout<<"\nMinimum value in BTS is "<<minValue(T);
+    cout<<"\nMinimax value in BTS is "<<maxValue(T);
+
 
 	return 0;
 }
