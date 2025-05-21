@@ -11,11 +11,11 @@ int main()
     bool **G = new bool*[m];
     for (int i = 0; i < m; i++) 
         G[i] = new bool[m]{0};
-    int x, y;
+    int u, v;
     for (int i = 0; i < n; i++) 
     {
-        cin >> x >> y;
-        G[x][y] = 1;
+        cin >> u >> v;
+        G[u][v] = 1;
     }
     int dem = 0;
     for (int i = 0; i < m; i++) 

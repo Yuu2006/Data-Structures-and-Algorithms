@@ -1,75 +1,122 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <queue>
+#include <string>
+#include <algorithm>
 using namespace std;
 
-void dijkstra(int s, int t, vector<vector<int>> &matrix) {
-    int v = matrix.size();
-    vector<int> d(v, INT_MAX); 
-    vector<int> parent(v, -1);
-    vector<bool> close(v, false); 
+#define INF 1000000000
 
-    priority_queue<pair<int, int>, vector<pair<int,int>>, greater<pair<int,int>>> open;
+class Graph 
+{
+public:
+    int v, q;
+    vector<vector<int>> matrix;
+    vector<string> names;
+    map<string, int> toIndex;
 
-    d[s] = 0;
-    open.push({0, s});
-
-    while (!open.empty()) {
-        int p = open.top().second;
-        open.pop();
-
-        if (close[p]) continue; // 2.3 Nếu đã duyệt thì bỏ qua
-        close[p] = true;        // 2.4 Đánh dấu đã duyệt
-
-        if (p == t) {           // 2.2 Nếu là đích thì truy vết đường đi
-            vector<int> path;
-            for (int u = t; u != -1; u = parent[u])
-                path.push_back(u);
-            cout << "Duong di ngan nhat: ";
-            for (int i = path.size() - 1; i >= 0; --i)
-                cout << path[i] << (i > 0 ? " -> " : "\n");
-            cout << "Do dai duong di: " << d[t] << endl;
-            return;
+    void inputGraph() 
+    {
+        cin >> v >> q;
+        matrix = vector<vector<int>>(v, vector<int>(v));
+        names = vector<string>(v);
+        for (int i = 0; i < v; ++i) 
+        {
+            cin >> names[i];
+            toIndex[names[i]] = i;
         }
+        for (int i = 0; i < v; ++i)
+            for (int j = 0; j < v; ++j)
+                cin >> matrix[i][j];
+    }
 
-        // 2.5 Mở các đỉnh kề q
-        for (int q = 0; q < v; ++q) {
-            if (matrix[p][q] > 0 && !close[q]) {
-                int new_dist = d[p] + matrix[p][q];
-                if (d[q] > new_dist) { // Gom cả 2.5.1 và 2.5.2
-                    d[q] = new_dist;
-                    parent[q] = p;
-                    open.push({d[q], q}); // push dù q đã có hay chưa trong open
+    void printGraph() 
+    {
+        for (int i = 0; i < v; ++i) 
+        {
+            for (int j = 0; j < v; ++j)
+                cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    void Dijkstra(int s, int g)
+    {
+        priority_queue<pair<int, int>> open;
+        vector<int> close(v,0);
+        vector<int> d(v,INF);
+        map<int,int> parent;
+        open.push({0, s});
+        d[s] = 0;
+        int DinhPhatTrien = 0;
+
+        while (!open.empty()) 
+        {
+            int u = open.top().second;
+            open.pop();
+
+            if (close[u]) 
+                continue;
+
+            close[u] = 1;
+            if (d[u] == INF) 
+                break; 
+
+            DinhPhatTrien++;
+            if (u == g) 
+                break;
+           
+            for (int i = 0; i < v; ++i)
+            {
+                if (matrix[u][i] > 0 && d[i] > d[u] + matrix[u][i])
+                {
+                    d[i] = d[u] + matrix[u][i];
+                    parent[i] = u;
+                    open.push({-d[i], i});
                 }
             }
         }
+
+        if (d[g] == INF) 
+        {
+            cout << "-unreachable-" << endl;
+            cout << DinhPhatTrien << " 0" << endl;
+            return;
+        }
+
+        vector<int> QuaTrinh;
+        for (int i = g;i != s;i = parent[i])
+            QuaTrinh.push_back(i);
+
+        QuaTrinh.push_back(s);
+        reverse(QuaTrinh.begin(), QuaTrinh.end());
+
+        for (int i = 0; i < QuaTrinh.size(); ++i) 
+        {
+            cout << names[QuaTrinh[i]];
+            if (i != QuaTrinh.size() - 1) 
+                cout << " ";
+        }
+        cout << endl;
+        cout << DinhPhatTrien << " " << d[g] << endl;
     }
 
-    cout << "Khong tim thay duong di tu " << s << " den " << t << endl;
-}
-
-int main() {
-    int v, n;
-    cin >> v >> n;
-
-    vector<string> vertices(v);
-    for (int i = 0; i < v; i++) {
-        cin >> vertices[i];
-    }
-
-    vector<vector<int>> matrix(n, vector<int>(n, 0));
-    cout << "Nhap cac canh (u v w):\n";
-    for (int i = 0; i < n; i++) 
+    void printQuaTrinh() 
     {
-        for (int j = 0; j < v; j++) 
-            cin >> matrix[i][j];
+        for (int i = 0; i < q; ++i) 
+        {
+            string start, end;
+            cin >> start >> end;
+            Dijkstra(toIndex[start], toIndex[end]);
+        }
     }
+};
 
-    int s, t;
-    cout << "Nhap dinh bat dau va dinh ket thuc: ";
-    cin >> s >> t;
-
-    dijkstra(s, t, matrix);
-
+int main() 
+{
+    Graph g;
+    g.inputGraph();
+    g.printQuaTrinh();
     return 0;
 }
