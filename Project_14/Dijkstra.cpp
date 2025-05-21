@@ -102,6 +102,7 @@ public:
         cout << DinhPhatTrien << " " << d[g] << endl;
     }
 
+    //dd
     void printQuaTrinh() 
     {
         for (int i = 0; i < q; ++i) 
