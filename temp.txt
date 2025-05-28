@@ -1,0 +1,33 @@
+#CTDL&GT
+
+- Thuật toán là giải pháp giải quyết bài toán
+- Thuật toán phải tuân theo các quy trình
+    - Tính xác định: Không mập mờ, mọi người hiểu được.
+    - Tính đúng 
+    - Tính dừng 
+    - Tính hữu hạn
+    - Tính vô tận
+
+CTDL&GT có mối quan hệ là: 
+- CTDL và GT được liên kết chặt chẽ qua công thức "CTDL + GT = Chương trình"
+- Để tạo ra 1 chương trình hoàn thiện phải thực hiện CTDL và GT
+- CTDL thay đổi thì GT phải thay đổi sao cho phù hợp
+- CTDL hỗ trợ cho GT chạy một cách hiệu quả
+
+Độ phức tạp là gì
+- là công cụ để đánh giá tính hiệu quả về thời gian của thuật toán
+- Phân lớp độ phức tạp của các giải thuật
+- Độ phức tạp: Được xác định thông qua các ký hiệu tiệm cận 
+
+Có 2 phương pháp đánh giá tính hiệu quả
+- PP Thực nghiệm: Chạy thử trên máy, chạy khoảng thời gian bao lâu.
+    - Ưu điểm:  
+    - Nhược điểm: 
+        - Phụ thuộc ngôn ngữ lập trình
+        - Trình độ của người lập trình
+        - Khó so sánh
+- PP Toán học (Mathematical analysis): sử dụng những công thức liên quan tới hàm thười gian với biến n. Đếm số phép toán 
+    - Ưu điểm:
+    - Nhược điểm: 
+
+Big-O: O(c) - O(logn) - O(n) - O(nlogn) - O(n^2) - O(n^3) - O(C^n) - O(n!) - O(n^n);    

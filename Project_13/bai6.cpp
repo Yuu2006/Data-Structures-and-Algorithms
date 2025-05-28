@@ -17,30 +17,30 @@ int main() {
         Dinh[v].push_back(u);
     }
 
-    queue<int> q;
-    q.push(0);
+    queue<int> open;
+    open.push(0);
     visited[0]=true;
 
-    vector<int> CoTheDen;
-    while (!q.empty()) {
-        int u=q.front();
-        q.pop();
+    vector<int> close;
+    while (!open.empty()) {
+        int u=open.front();
+        open.pop();
         
         for (int v : Dinh[u]) {
             if (!visited[v]) {
                 visited[v]=true;
-                q.push(v);
-                CoTheDen.push_back(v);
+                open.push(v);
+                close.push_back(v);
             }
         }
     }
 
-    if (CoTheDen.empty()) {
+    if (close.empty()) {
         cout << "KHONG";
     } 
     else {
-        sort(CoTheDen.begin(), CoTheDen.end());
-        for (int v : CoTheDen) {
+        sort(close.begin(), close.end());
+        for (int v : close) {
             cout <<v<< " ";
         }
     }
